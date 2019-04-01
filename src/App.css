@@ -1,33 +1,160 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+body {
+  height: 118vh;
+  width: 100vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-family: 'Montserrat', sans-serif;
+  color: #9c9c9c;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header {
+  width: 100%;
+  height: 110px;
+  border-bottom: 1px solid rgba(186, 186, 186, 0.59);
+}
+
+.header-container {
+  height: 100%;
+  max-width: 80%;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header-container span {
+  font-size: 21px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-container {
+  max-width: 80%;
+  margin: auto;
+  height: 125px;
+  display: flex;
+  align-items: center;
+}
+
+.search-row {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  display: flex;
+}
+
+.search-bar-container {
+  position: relative;
+  height: 100%;
+  width: 500px;
+  max-width: 60%;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  background-color: white;
+  color: grey;
+  box-shadow: 0 0 10px #c3c3c3;
+  overflow: hidden;
+}
+
+.search-bar-container i {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  z-index: 3;
+  color: grey;
+  font-size: 20px;
+}
+
+#search-bar {
+  border: 0;
+  outline: 0;
+  position: absolute;
+  top: 0;
+  left: 40px;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  color: grey;
+}
+
+.layout-buttons {
+  display: inline-block;
+  height: 100%;
+  width: 45px;
+  margin-left: 8px;
+  background-size: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.layout-buttons svg {
+  height: 100%;
+}
+
+.layout-buttons:nth-of-type(1) {
+  background-image: url("./assets/view-btns/small.svg");
+  margin-left: 35px;
+}
+
+.layout-buttons:nth-of-type(2) {
+  background-image: url("./assets/view-btns/list.svg");
+}
+
+.layout-buttons:nth-of-type(3) {
+  background-image: url("./assets/view-btns/large.svg");
+}
+
+.active {
+  border: 2px solid #6597ec;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 80%;
+  margin: 20px auto;
+  position: relative;
+}
+
+.small-thumb, .large-thumb {
+  box-shadow: 0 0 3px #adadad;
+  margin-top: 1vw;
+  display: flex;
+  flex: initial;
+  flex-direction: column;
+}
+
+.small-thumb {
+  position: relative;
+  height: 15.2vw;
+  width: 250px;
+  max-width: 19%;
+}
+
+.large-thumb {
+  position: relative;
+  height: 20.3vw;
+  width: 375px;
+  max-width: 32.5%;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image img {
+  width: 120%;
+  height: auto;
 }
