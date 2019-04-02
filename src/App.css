@@ -7,6 +7,7 @@
 body {
   height: 118vh;
   width: 100vw;
+  min-width: 470px;
   background-size: contain;
   background-repeat: no-repeat;
   font-family: 'Montserrat', sans-serif;
@@ -59,6 +60,17 @@ header {
   color: grey;
   box-shadow: 0 0 10px #c3c3c3;
   overflow: hidden;
+  transition: all 1s;
+  autofill: white;
+}
+
+.search-bar-container:hover, .search-bar-container:focus {
+  box-shadow: 0 0 20px #c3c3c3;
+}
+
+.search-bar-container:hover i, .search-bar-container:focus i {
+  transition: all .5s;
+  color: #6597ec;
 }
 
 .search-bar-container i {
@@ -80,6 +92,19 @@ header {
   height: 100%;
   font-size: 20px;
   color: grey;
+}
+
+.search-button {
+  background: #6597ec;
+  outline: none;
+  border: none;
+  color: white;
+  height: 100%;
+  width: 80px;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  width: 30%;
 }
 
 .layout-buttons {
@@ -152,9 +177,15 @@ header {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  background-size: cover;
 }
 
 .image img {
   width: 120%;
   height: auto;
+}
+
+.image-link {
+  height: 100%;
+  width: 100%;
 }

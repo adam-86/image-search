@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 const Header = () => {
   return (
@@ -6,7 +6,7 @@ const Header = () => {
       <div className="header-container">
         <div>
           <span>
-            <strong>Image</strong> Search
+            <strong>Gif</strong> Search
           </span>
         </div>
       </div>

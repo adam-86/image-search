@@ -4,34 +4,44 @@ import Gallery from "./galleryComponents//Gallery.js";
 
 export default class SearchBar extends Component {
   state = {
-    queryText: "random",
-    url:
-      "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=",
-    key: "c1a68f5a5fd40781be6fb8640d404ffa",
-    secret: "cdb0ca44a9a68a5e",
-    resultsPerPage: 30,
-    images: {}
+    url: "https://api.giphy.com/v1/gifs/search?api_key=",
+    key: "iNACUQW9yFvcDyaPwxNVy45mKeNNx9XP&",
+    queryText: "",
+    resultsPerPage: 100,
+    gifs: {},
+    pagination: []
   };
 
   onChange = e => {
     this.setState({ queryText: e.target.value });
-    console.log(this.state.queryText);
+  };
+
+  checkKey = e => {
+    if (e.key === "Enter") {
+      this.search();
+    }
   };
 
   search = () => {
-    console.log("search pressed");
-    const { url, key, queryText, resultsPerPage } = this.state;
-    axios
-      .get(
-        `${url}${key}&per_page=${resultsPerPage}&format=json&nojsoncallback=1&text=${queryText}&extras=url_o`
-      )
-      .then(response => {
-        this.setState({ images: response.data.photos.photo });
-        console.log(this.state.images);
-      })
-      .catch(err => console.log(err));
+    if (this.state.queryText) {
+      const { url, key, queryText, resultsPerPage } = this.state;
+      axios
+        .get(
+          `${url}${key}&q=${queryText}&limit=${resultsPerPage}&offset=0&rating=R&lang=en`
+        )
+        .then(response => {
+          this.setState({
+            gifs: response.data.data,
+            pagination: response.data.pagination
+          });
+          console.log(this.state.pagination);
+        })
+        .catch(err => console.log(err));
 
-    this.state.queryText = "";
+      this.setState.queryText = "";
+    } else {
+      return;
+    }
   };
 
   render() {
@@ -46,18 +56,19 @@ export default class SearchBar extends Component {
                 id="search-bar"
                 value={this.state.queryText}
                 onChange={this.onChange}
+                onKeyPress={this.checkKey}
               />
+              <button className="search-button" onClick={this.search}>
+                Search
+              </button>
             </div>
-
             <button className="layout-buttons active" />
             <button className="layout-buttons" />
             <button className="layout-buttons" />
-            <button onClick={this.search}>Search</button>
           </div>
         </div>
-        {this.state.images.length > 0 ? (
-          <Gallery images={this.state.images} />
-        ) : null}
+
+        {this.state.gifs.length > 0 ? <Gallery gifs={this.state.gifs} /> : null}
       </div>
     );
   }

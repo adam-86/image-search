@@ -5,6 +5,7 @@
 body
   height: 118vh
   width: 100vw
+  min-width: 470px
   background-size: contain
   background-repeat: no-repeat
   font-family: 'Montserrat', sans-serif
@@ -26,6 +27,7 @@ header
   span
     font-size: 21px
 
+// search styles
 .search-container
   max-width: 80%
   margin: auto
@@ -52,6 +54,13 @@ header
   color: grey
   box-shadow: 0 0 10px rgb(195, 195, 195)
   overflow: hidden
+  transition: all 1s
+  autofill: white
+  &:hover, &:focus
+    box-shadow: 0 0 20px rgb(195, 195, 195)
+    i
+      transition: all .5s
+      color: rgb(101, 151, 236)
   i
     width: auto
     margin: 0
@@ -66,11 +75,24 @@ header
   position: absolute
   top: 0
   left: 40px
-
   width: 100%
   height: 100%
   font-size: 20px
   color: grey
+
+
+
+.search-button
+  background: #6597ec
+  outline: none
+  border: none
+  color: white
+  height: 100%
+  width: 80px
+  position: absolute
+  right: 0
+  cursor: pointer
+  width: 30%
 
 .layout-buttons
   display: inline-block
@@ -125,10 +147,15 @@ header
   max-width: 32.5%
 
 .image
+
   height: 100%
   width: 100%
   overflow: hidden
+  background-size: cover
 
   img
     width: 120%
     height: auto
+.image-link
+  height: 100%
+  width: 100%

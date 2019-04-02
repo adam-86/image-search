@@ -3,16 +3,19 @@ import React, { Component } from "react";
 export default class Gallery extends Component {
   render() {
     let gallery;
-    const { images } = this.props;
+    const { gifs } = this.props;
 
-    if (images) {
+    if (gifs) {
       gallery = (
         <div className="image-container">
-          {images.map(img => (
-            <div className="image-block small-thumb" key={img.secret}>
-              <div className="image">
-                <img src={img.url_o} alt="" />
-              </div>
+          {gifs.map(gif => (
+            <div className="image-block small-thumb" key={gif.id}>
+              <a className="image-link" target="_blank" href={gif.url}>
+                <div
+                  className="image"
+                  style={{ backgroundImage: `url(${gif.images.original.url})` }}
+                />
+              </a>
             </div>
           ))}
         </div>
