@@ -1,3 +1,3 @@
-##### React search that returns images from the Flickr apigit
+##### React search that returns gifs from the Giphy api
 
 ##### Work in progress...
