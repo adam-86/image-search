@@ -9,7 +9,8 @@ export default class SearchBar extends Component {
     queryText: "",
     resultsPerPage: 100,
     gifs: {},
-    pagination: []
+    pagination: [],
+    listStyle: "smallThumbs"
   };
 
   onChange = e => {
@@ -31,8 +32,8 @@ export default class SearchBar extends Component {
         )
         .then(response => {
           this.setState({
-            gifs: response.data.data,
-            pagination: response.data.pagination
+            gifs: response.data.data
+            // pagination: response.data.pagination
           });
           console.log(this.state.pagination);
         })
@@ -40,8 +41,13 @@ export default class SearchBar extends Component {
 
       this.setState.queryText = "";
     } else {
+      alert("No empty searches ノ( º _ ºノ) ");
       return;
     }
+  };
+
+  setListStyle = e => {
+    this.setState({ listStyle: e.target.name });
   };
 
   render() {
@@ -50,25 +56,40 @@ export default class SearchBar extends Component {
         <div className="search-container">
           <div className="search-row">
             <div className="search-bar-container">
-              <i className="fas fa-search" />
               <input
                 type="text"
                 id="search-bar"
                 value={this.state.queryText}
                 onChange={this.onChange}
                 onKeyPress={this.checkKey}
+                required
               />
               <button className="search-button" onClick={this.search}>
-                Search
+                <i className="fas fa-search" />
               </button>
             </div>
-            <button className="layout-buttons active" />
-            <button className="layout-buttons" />
-            <button className="layout-buttons" />
+
+            <button
+              className="layout-buttons active"
+              name="smallThumbs"
+              onClick={this.setListStyle}
+            />
+            <button
+              className="layout-buttons"
+              name="largeThumbs"
+              onClick={this.setListStyle}
+            />
+            <button
+              className="layout-buttons"
+              name="list"
+              onClick={this.setListStyle}
+            />
           </div>
         </div>
 
-        {this.state.gifs.length > 0 ? <Gallery gifs={this.state.gifs} /> : null}
+        {this.state.gifs.length > 0 ? (
+          <Gallery gifs={this.state.gifs} listStyle={this.state.listStyle} />
+        ) : null}
       </div>
     );
   }
