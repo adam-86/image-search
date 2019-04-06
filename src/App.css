@@ -4,8 +4,13 @@
   box-sizing: border-box;
 }
 
+.App {
+  position: relative;
+  min-height: 100vh;
+}
+
 body {
-  height: 118vh;
+  min-height: 100%;
   width: 100vw;
   min-width: 470px;
   background-size: contain;
@@ -110,12 +115,12 @@ header {
   outline: none;
   border: 0;
   cursor: pointer;
-  transition: all 1s;
-  border-bottom: 2px solid transparent;
+  transition: all .4s;
+  border: 2px solid transparent;
 }
 
 .layout-buttons:hover {
-  border-bottom: 2px solid #6597ec;
+  transform: scale(1.01);
 }
 
 .layout-buttons svg {
@@ -135,6 +140,44 @@ header {
   background-image: url("./assets/view-btns/list.svg");
 }
 
+.active {
+  border: 2px solid #6597ec;
+  border-radius: 5px;
+}
+
+.display-count {
+  position: absolute;
+  width: auto;
+  top: 198px;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.nav-button-container {
+  position: absolute;
+  top: 230px;
+}
+
+.page-number {
+  font-size: 12px;
+}
+
+.nav-buttons {
+  height: 20px;
+  width: auto;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-size: 12px;
+  transition: all .3s;
+  color: grey;
+  cursor: pointer;
+}
+
+.nav-buttons:hover {
+  color: #6597ec;
+}
+
 .image-container {
   display: flex;
   flex-wrap: wrap;
@@ -152,12 +195,14 @@ header {
   flex-direction: column;
   background-size: contain;
   background-repeat: no-repeat;
-  background-image: url("./assets/loader.gif");
+  background-image: url("./assets/dots.gif");
   background-position: center;
+  background-size: 140%;
+  background-color: #bebebe;
 }
 
 .transition {
-  transition: all .5s;
+  transition: all .1s;
 }
 
 .smallThumbs {
@@ -189,4 +234,11 @@ header {
 .image-link {
   height: 100%;
   width: 100%;
+}
+
+footer {
+  bottom: 0;
+  height: 110px;
+  width: 100%;
+  margin-top: 115px;
 }

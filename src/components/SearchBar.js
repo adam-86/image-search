@@ -11,15 +11,27 @@ export default class SearchBar extends Component {
     resultsTotal: "",
     gifs: {},
     listStyle: "smallThumbs",
-    pageNumber: "1"
+    pageNumber: null,
+    searchDisplay: ""
   };
 
+  // sets search value
   onChange = e => {
     this.setState({ queryText: e.target.value });
   };
 
+  // checks if user hits enter key and calls search
+  checkKey = e => {
+    if (e.key === "Enter") {
+      this.search();
+    }
+  };
+
   search = () => {
+    // if query text exists, send http request
     if (this.state.queryText) {
+      // set search term for display up search bar
+      this.setState({ searchDisplay: this.state.queryText });
       const { url, key, queryText, pageOffset } = this.state;
       axios
         .get(
@@ -31,15 +43,16 @@ export default class SearchBar extends Component {
             resultsTotal: response.data.pagination.total_count
           });
 
+          //if search has not yet ran, set initial page offset to 25
           if (
             this.state.pageOffset === 0
-              ? this.setState({ pageOffset: 25 })
+              ? this.setState({ pageOffset: 25, pageNumber: 1 })
               : null
           )
             console.log(this.state.resultsTotal);
         })
         .catch(err => console.log(err));
-
+      // clear query text input after search
       this.setState.queryText = "";
     } else {
       alert("You didn't type anything? ノ( º – ºノ) ");
@@ -47,31 +60,39 @@ export default class SearchBar extends Component {
     }
   };
 
+  // sets image grid size
   setListStyle = e => {
-    this.setState({ listStyle: e.target.name });
-  };
-  // update
-  nextPage = () => {
-    this.setState({
-      pageOffset: this.state.pageOffset + 25,
-      pageNumber: this.state.pageNumber + 1
+    const layoutButtons = document.querySelectorAll(".layout-buttons");
+
+    Array.from(layoutButtons).forEach(layoutBtn => {
+      layoutBtn.className = "layout-buttons";
     });
-    this.search();
+
+    this.setState({ listStyle: e.target.name });
+    e.target.className = "layout-buttons active";
   };
-  previousPage = () => {
-    if (this.state.pageNumber > 1) {
+
+  // gets the next 25 results
+  nextPage = () => {
+    if (this.state.searchDisplay) {
       this.setState({
-        pageOffset: this.state.pageOffset - 25,
-        pageNumber: this.state.pageNumber - 1
+        pageOffset: this.state.pageOffset + 25,
+        pageNumber: this.state.pageNumber + 1
       });
       this.search();
     }
   };
 
-  // run search if user hits enter key
-  checkKey = e => {
-    if (e.key === "Enter") {
-      this.search();
+  // go back to previous 25 results
+  previousPage = () => {
+    if (this.state.searchDisplay) {
+      if (this.state.pageNumber > 1) {
+        this.setState({
+          pageOffset: this.state.pageOffset - 25,
+          pageNumber: this.state.pageNumber - 1
+        });
+        this.search();
+      }
     }
   };
 
@@ -104,29 +125,28 @@ export default class SearchBar extends Component {
               name="largeThumbs"
               onClick={this.setListStyle}
             />
-            <button
-              className="layout-buttons"
-              name="list"
-              onClick={this.setListStyle}
-            />
           </div>
           <span className="display-count">
+            {/* only display result count if search returned results*/}
             {this.state.resultsTotal > 0
               ? `Showing  ${this.state.pageOffset}
-                out of ${this.state.resultsTotal}`
+                out of ${this.state.resultsTotal} results for "${
+                  this.state.searchDisplay
+                }"`
               : null}
           </span>
 
           <div className={"nav-button-container"}>
             <button className={"nav-buttons"} onClick={this.previousPage}>
-              previous page
+              <i className="fas fa-angle-double-left" />
             </button>
-
+            <span className="page-number"> Page: {this.state.pageNumber} </span>
             <button className={"nav-buttons"} onClick={this.nextPage}>
-              next page
+              <i className="fas fa-angle-double-right" />
             </button>
           </div>
         </div>
+        {/* If state contains gifs, render gallery component */}
         {this.state.gifs.length > 0 ? (
           <Gallery
             gifs={this.state.gifs}

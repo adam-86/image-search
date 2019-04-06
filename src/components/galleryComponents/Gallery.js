@@ -7,14 +7,18 @@ export default class Gallery extends Component {
       listStyle: this.props.listStyle
     };
   }
+
+  // Update state from props when grid size buttons are pressed
   componentDidRecieveProps() {
-    this.setState({ listStyle: this.props.listStyle });
+    this.setState({
+      listStyle: this.props.listStyle
+    });
   }
 
   render() {
     let gallery;
     const { gifs } = this.props;
-
+    // if props contain gifs, create image block for each one.
     if (gifs) {
       gallery = (
         <div className="image-container">

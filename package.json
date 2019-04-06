@@ -1,12 +1,15 @@
 {
   "name": "image-search",
+  "homepage": "https://adam-86.github.io/image-search",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "gh-pages": "^2.0.1",
+    "jQuery": "^1.7.4",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-magnific-popup": "^1.0.1",
     "react-scripts": "2.1.8"
   },
   "scripts": {
