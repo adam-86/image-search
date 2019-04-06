@@ -2,14 +2,39 @@
   margin: 0
   padding: 0
   box-sizing: border-box
+
+.App
+  position: relative
+  min-height: 100vh
+  transition: background .5s
+
+.lightTheme, .darkTheme
+  clip-path: circle(31.0% at 49% 25%)
+  height: 150px
+  width: 50px
+  position: absolute
+  right: 12vw
+  top: 30px
+  border: none
+  outline: none
+  background: transparent
+  background-image: url("./assets/view-btns/sun-and-moon.svg")
+  background-repeat: no-repeat
+  cursor: pointer
+
+.lightTheme
+  transform: rotate(180deg)
+  clip-path: circle(31.0% at 51% 75%)
+
 body
-  height: 118vh
+  min-height: 100%
   width: 100vw
   min-width: 470px
   background-size: contain
   background-repeat: no-repeat
   font-family: 'Montserrat', sans-serif
   color: rgb(156, 156, 156)
+
 
 // header styles
 header
@@ -25,7 +50,7 @@ header
   flex-direction: column
   justify-content: center
   span
-    font-size: 21px
+    font-size: 24px
 
 // search styles
 .search-container
@@ -41,7 +66,6 @@ header
   position: relative
   display: flex
 
-
 .search-bar-container
   position: relative
   height: 100%
@@ -51,36 +75,26 @@ header
   align-items: center
   padding-left: 10px
   background-color: white
-  color: grey
+
   box-shadow: 0 0 10px rgb(195, 195, 195)
   overflow: hidden
   transition: all 1s
   autofill: white
   &:hover, &:focus
     box-shadow: 0 0 20px rgb(195, 195, 195)
+  &:active
     i
-      transition: all .5s
-      color: rgb(101, 151, 236)
-  i
-    width: auto
-    margin: 0
-    padding: 0
-    z-index: 3
-    color: grey
-    font-size: 20px
+      transform: scale(.9)
 
 #search-bar
   border: 0
   outline: 0
   position: absolute
   top: 0
-  left: 40px
   width: 100%
   height: 100%
   font-size: 20px
   color: grey
-
-
 
 .search-button
   background: #6597ec
@@ -88,35 +102,69 @@ header
   border: none
   color: white
   height: 100%
-  width: 80px
   position: absolute
   right: 0
   cursor: pointer
-  width: 30%
+  width: 20%
+  i
+    font-size: 14px
 
 .layout-buttons
-  display: inline-block
-  height: 100%
-  width: 45px
-  margin-left: 8px
-  background-size: 70%
-  background-position: center
-  background-repeat: no-repeat
+  align-self: center
+  height: 75%
+  width: 40px
+  margin-left: 20px
   outline: none
   border: 0
   cursor: pointer
-  border-radius: 5px
-  svg
-    height: 100%
+  transition: all .4s
+  background-color: rgb(195, 195, 195)
+  mask-position: center
+  mask-size: contain
+  mask-repeat: no-repeat
+  // filter: hue-rotate(220deg) saturate(5)
+  &:active
+    transform: scale(.95)
   &:nth-of-type(1)
-    background-image: url('./assets/view-btns/small.svg')
+    mask-image: url('./assets/view-btns/small.svg')
     margin-left: 35px
   &:nth-of-type(2)
-    background-image: url('./assets/view-btns/list.svg')
+    mask-image: url("./assets/view-btns/medium.svg")
   &:nth-of-type(3)
-    background-image: url('./assets/view-btns/large.svg')
+    mask-image: url("./assets/view-btns/large.svg")
+
 .active
-  border: 2px solid rgb(101, 151, 236)
+  background-color: rgb(101, 151, 236)
+
+.display-count
+  position: absolute
+  width: auto
+  top: 198px
+  font-size: 12px
+  font-style: italic
+
+.nav-button-container
+  text-align: center
+  i
+    font-size: 15px
+
+.page-number
+  font-size: 14px
+
+.nav-buttons
+  height: 20px
+  width: auto
+  background: transparent
+  border: 0
+  outline: 0
+  font-size: 14px
+  transition: all .3s
+  color: #e9e3e3
+  cursor: pointer
+  margin-left: 5px
+  margin-right: 5px
+  &:hover
+    color: rgb(101, 151, 236)
 
 .image-container
   display: flex
@@ -127,35 +175,111 @@ header
   position: relative
 
 
-.small-thumb, .large-thumb
+.smallThumbs, .mediumThumbs, .largeThumbs
     box-shadow: 0 0 3px rgb(173, 173, 173)
     margin-top: 1vw
     display: flex
     flex: initial
     flex-direction: column
+    background-size: contain
+    background-repeat: no-repeat
+    background-image: url('./assets/dots.gif')
+    background-position: center
+    background-size: 100%
 
-.small-thumb
+.transition
+    transition: all .1s
+
+.smallThumbs
   position: relative
   height: 15.2vw
   width: 250px
   max-width: 19%
 
-.large-thumb
+.mediumThumbs
   position: relative
   height: 20.3vw
   width: 375px
   max-width: 32.5%
 
-.image
+.largeThumbs
+  position: relative
+  height: 30.3vw
+  width: 570px
+  max-width: 49%
 
+.image
   height: 100%
   width: 100%
   overflow: hidden
   background-size: cover
-
+  box-shadow: 0 0 10px rgb(173, 173, 173)
   img
     width: 120%
     height: auto
 .image-link
   height: 100%
   width: 100%
+
+footer
+  bottom: 0
+  height: 110px
+  width: 100%
+  margin-top: 115px
+
+
+//mobile styles
+@media screen and (max-width: 500px)
+  .search-container
+  .smallThumbs, .largeThumbs
+    height: 275px
+    max-width: 100%
+    width: 100%
+    margin-top: 20px
+
+  .image-container
+    max-width: 90%
+    margin: 20px auto
+
+  .layout-buttons
+    display: none
+
+  .search-bar-container, .search-row
+    width: 100%
+    max-width: 100%
+
+  .search-bar
+    width: 500px
+    max-width: 100%
+  body
+    min-width: 0
+
+.dark
+  // background: radial-gradient(#464f59 0%,#141516 100%)
+  background: black
+  transition: all .5s
+
+  header
+    border-bottom: .5px solid #269FD7
+    strong
+      color: #269FD7
+
+
+  .smallThumbs, .mediumThumbs, .largeThumbs, .image
+    box-shadow: none
+
+  .search-bar-container
+    box-shadow: none
+
+  .layout-buttons
+    background: rgb(255, 255, 255)
+
+  .active, .search-button
+    background: #269FD7
+  span
+    // color: #e9e3e3
+
+  .nav-button-container
+    .nav-buttons
+      &:hover
+        color: #269FD7
