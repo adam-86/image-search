@@ -197,8 +197,8 @@ header {
   background-repeat: no-repeat;
   background-image: url("./assets/dots.gif");
   background-position: center;
-  background-size: 140%;
-  background-color: #bebebe;
+  background-size: 100%;
+  background-color: green;
 }
 
 .transition {
@@ -241,4 +241,31 @@ footer {
   height: 110px;
   width: 100%;
   margin-top: 115px;
+}
+
+@media screen and (max-width: 500px) {
+  .smallThumbs, .largeThumbs {
+    height: 275px;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .image-container {
+    max-width: 90%;
+    margin: 20px auto;
+  }
+  .layout-buttons {
+    display: none;
+  }
+  .search-bar-container, .search-row {
+    width: 100%;
+    max-width: 100%;
+  }
+  .search-bar {
+    width: 500px;
+    max-width: 100%;
+  }
+  body {
+    min-width: 0;
+  }
 }
