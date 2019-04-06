@@ -1,6 +1,6 @@
 {
-  "short_name": "Image Search",
-  "name": "Flickr API image search",
+  "short_name": "Gif Search",
+  "name": "Giphy API gif search",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
